@@ -1,0 +1,71 @@
+td {padding-bottom:20px;
+    padding-left:20px;
+    
+}
+
+* {
+box-sizing: border-box;
+}
+body{
+background: white;
+}
+
+.search {
+position: absolute;
+
+width: 442px;
+}
+
+.search .green_window {
+margin-top: 0;
+width: 400px;
+height: 49px;
+display: inline-block;
+border: 2px solid #ff8412;
+}
+.search .input_text {
+margin: 12px 0 0 9px; /* 위 왼쪽 아래 오른쪽 */
+width: 405px;
+height: 23px;
+outline: 0;
+border: 0;
+background-color: transparent;
+font-weight: 700; /* bold가 500 */
+font-size: 18px;
+}
+.search .sch_smit {
+position: absolute;
+top: 0;
+right: 0;
+overflow: visible;
+width: 49px;
+height: 49px;
+border: 0;
+background: #ff8412;
+
+}
+.ico_search_submit, 
+.search .btn_keyboard, 
+.ico_keyboard, 
+.search .btn_arw .ico_arr {
+background-image: url(https://s.pstatic.net/static/www/img/2018/sp_search.svg);
+background-repeat: no-repeat;
+};
+
+a {
+text-decoration: none;
+}
+.ico_search_submit {
+position: absolute;
+top: 14px;
+left: 14px;
+width: 21px;
+height: 21px;
+background-position: -4px -60px;
+
+}
+
+
+.container my-3 {
+max-width : 100px
+}

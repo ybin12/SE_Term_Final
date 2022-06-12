@@ -1,0 +1,127 @@
+<html>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <script type="text/javascript">
+        alert("{{messages[-1]}}");
+    </script>
+    {% endif %}
+    {% endwith %}
+    <head>
+        <style>
+        .input-group {margin:20px;}
+        input[type=text] {
+            height: 32px;
+            font-size: 15px;
+            border: 0;
+            border-radius: 15px;
+            outline: none;
+            padding-left: 10px;
+            background-color: rgb(233, 233, 233);
+        }
+        textarea {
+            height: 80px;
+            font-size: 15px;
+            border: 0;
+            border-radius: 15px;
+            outline: none;
+            padding-left: 10px;
+            background-color: rgb(233, 233, 233);
+            
+        }
+        
+        .description_td {
+            padding : 30px 10px;
+        }
+
+        </style>
+        <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='search.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
+
+
+    </head>
+    <body>
+    <div class="container my-3" style = "width:80%">
+        <table>
+            <tr>
+                <td>
+                    <img src = "../static/market.png" onClick = "location.href='/'" style = "cursor:pointer">
+                </td>
+                <td style = "padding-top : 15px;padding-right : 550px">
+                    <form action = "search_key" method = "post">
+                        <div class="search">
+                            <span class="green_window">
+                                <input type="text" id="query" class="input_text" maxlength="255" name = "key" />
+                            <button id="search_btn" type="submit" title="검색"  class="sch_smit">
+                                <span class="ico_search_submit"></span>
+                            </button>
+                        </div><!-- search --> <br><br>
+                    </form>
+                </td>
+                <td style = "padding-right:30px;padding-top:10px">
+                    <img src = "../static/writing.png" style = "height:30px;width:30px">
+                    <label onClick = "location.href='/write'" style = "font-family:Nanum Gothic;font-weight:800;cursor:pointer">판매글 작성</label>
+                </td>
+                <td style = "padding-top:10px">
+                    <img src = "../static/follow.png" style = "height:30px;width:30px">
+                    <label onClick = "location.href='/follower_page'" style = "font-family:Nanum Gothic;font-weight:800;cursor:pointer">팔로우 목록</label>
+                </td>
+
+            </tr>
+        </table>
+
+        <hr style = "height: 10px;color:red;background:orange;"><br>
+
+
+
+        
+        <form action = "{{url_for('modify', input_id = products.id)}}" method = "post">
+
+        <div class = "row">
+            <div class = "col">
+                <img src = "{{url_for('static', filename = products.p_img)}}" style = "width:500px; height:480px"/>
+            </div>
+            
+            <div class = "col">
+                <table><br>
+                <tr>
+                    <td class = "description_td" style = "padding-top:0px">                      
+                        <i class="fa-solid fa-pen"> 상품설명</i>
+                    </td>
+                    <td class = "description_td" style = "padding-top:50px">
+                        <textarea name = "p_info" class="form-control" cols="30" rows="5">{{products.p_info}}</textarea>
+                        
+                    </td>
+                </tr>
+                    
+                <tr>
+                    <td class = "description_td">
+                        <i class="fa-solid fa-hashtag"> 키워드</i>
+                    </td>
+                    <td class = "description_td">
+                        <input type = "text" name = "p_key"  value = {{products.p_key}}>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class = "description_td">
+                        <i class="fa-solid fa-won-sign"> 가격</i>
+                    </td>
+                    <td class = "description_td">
+                        <input type = "text" name = "p_price" value = {{products.p_price}}>
+                    </td>
+                </tr>
+                </table>
+            </div>
+        </div>
+
+        <div style = "display:flex; justify-content:center; align-items:center">
+            <input type = "button" value = "취소" class = "btn btn-secondary" style ="margin:10px" onClick = "window.location.href='{{url_for('product_page', input_id = products.id)}}'">
+            <input type = "submit" name = "write" class = "btn btn-secondary" style ="margin:10px" value = "수정완료">
+        </div>
+
+        </form>
+    </div>
+    </body>
+</html>

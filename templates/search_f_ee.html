@@ -1,0 +1,89 @@
+<html>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <script type="text/javascript">
+        alert("{{messages[-1]}}");
+    </script>
+    {% endif %}
+    {% endwith %}
+    <head>
+        <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='search.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container my-3" style = "width:80%">
+            <div>
+                <h1></h1><br>
+            </div>
+            <table>
+                <tr>
+                    <td style = "padding-right : 40px">
+                        <img src = "../static/market.png" onClick = "location.href='/'" style = "cursor:pointer">
+                    </td>
+                    <td style = "padding-top : 15px;padding-right : 550px">
+                        <form action = "search_key" method = "post">
+                            <div class="search">
+                                <span class="green_window">
+                                    <input type="text" id="query" class="input_text" maxlength="255" name = "key" />
+                                <button id="search_btn" type="submit" title="검색"  class="sch_smit">
+                                    <span class="ico_search_submit"></span>
+                                </button>
+                            </div><!-- search --> <br><br>
+                        </form>
+                    </td>
+                    <td style = "padding-right:30px;padding-top:10px">
+                        <img src = "../static/writing.png" style = "height:30px;width:30px">
+                        <label onClick = "location.href='/write'" style = "font-family:Nanum Gothic;font-weight:800;cursor:pointer">판매글 작성</label>
+                    </td>
+                    <td style = "padding-top:10px">
+                        <img src = "../static/follow.png" style = "height:30px;width:30px">
+                        <label onClick = "location.href='/follower_page'" style = "font-family:Nanum Gothic;font-weight:800;cursor:pointer">팔로우 목록</label>
+                    </td>
+    
+                </tr>
+            </table>
+    
+            
+            <hr style = "height: 10px;color:red;background:orange;"><br>
+            
+                <h1 style = "font-family:Nanum Gothic;font-weight:800;cursor:pointer">{{user}}님의 상품 목록</h1>
+                <br>
+            <table class="table">
+                <thead>
+                <tr class="table-dark">
+                    <th>번호</th>
+                    <th>상품</th>
+                    <th>키워드</th>
+                    <th>가격</th>
+                    <th>판매상태</th>
+                    <th>ID</th>
+                    <th>작성일시</th>
+                </thead>
+                <tbody>
+                {%if product_list%}
+                {%for products in product_list%}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td><a href="{{url_for('product_page', input_id = products.id)}}">{{products.p_info}}</a></td>
+                    <td>{{products.p_key}}</td>
+                    <td>{{products.p_price}}</td>
+                    <td>{{products.p_sold}}</td>
+                    <td>{{products.p_id}}</td>
+                    <td>{{products.p_time}}</td>
+                </tr>
+                {%endfor%}
+                {%else%}
+                <tr>
+                    <td colspan="7">상품이 없습니다</td>
+                </tr>
+                {%endif%}
+                </tbody>
+            </table>
+            <div>
+                <br><input type = "button" style ="margin:5px;background-color:orange;border:0;outline:0" class = "btn btn-secondary" name = "write" value = "돌아가기" onClick = "location.href='/follower_page'">
+            </div>
+        <div>
+    </body>
+</html>

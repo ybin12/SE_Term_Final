@@ -1,0 +1,110 @@
+<html>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <script type="text/javascript">
+        alert("{{messages[-1]}}");
+    </script>
+    {% endif %}
+    {% endwith %}
+    <head>
+        <link rel="stylesheet" href="{{url_for('static', filename='bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='search.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
+        
+
+        <style>
+        
+        </style>
+        
+    </head>
+    <body>
+        
+
+    
+    <div class="container my-3" style = "width:80%">
+        
+        <div>
+            <h1></h1><br>
+        </div>
+        <table>
+            <tr>
+                <td style = "padding-right : 40px">
+                    <img src = "../static/market.png" onClick = "location.href='/'" style = "cursor:pointer">
+                </td>
+                <td style = "padding-top : 15px;padding-right : 550px">
+                    <form action = "search_key" method = "post">
+                        <div class="search">
+                            <span class="green_window">
+                                <input type="text" id="query" class="input_text" maxlength="255" name = "key" />
+                            <button id="search_btn" type="submit" title="검색"  class="sch_smit">
+                                <span class="ico_search_submit"></span>
+                            </button>
+                        </div><!-- search --> <br><br>
+                    </form>
+                </td>
+                <td style = "padding-right:30px;padding-top:10px">
+                    <img src = "../static/writing.png" style = "height:30px;width:30px">
+                    <label onClick = "location.href='/write'" style = "font-family:Nanum Gothic;font-weight:800;cursor:pointer">판매글 작성</label>
+                </td>
+                <td style = "padding-top:10px">
+                    <img src = "../static/follow.png" style = "height:30px;width:30px">
+                    <label onClick = "location.href='/follower_page'" style = "font-family:Nanum Gothic;font-weight:800;cursor:pointer">팔로우 목록</label>
+                </td>
+
+            </tr>
+        </table>
+
+        
+        <hr style = "height: 10px;color:red;background:orange;"><br>
+
+        
+        <div class = "row">
+            <div class = "col">
+                <div class="card" style="width: 38rem">
+                    <div style = "text-align:center">
+                        <img src="{{url_for('static', filename = products.p_img)}}" class="card-img-top" alt="no_image" style = "width:400px;height:400px;float:center">
+                    </div>
+                    
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            
+                            <i class="fa-solid fa-user" style = "padding-top:5px"> 판매자</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{products.p_id}}
+                            <i class="fa-solid fa-heart-circle-plus" style = "float:right;padding-top:5px;cursor:pointer;padding-right:14px" onClick = "window.location.href='{{url_for('follow', input_id = products.p_id)}}'"> 팔로우하기</i>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fa-solid fa-dollar-sign" style = "padding-top:5px"> 판매상태</i>&nbsp;&nbsp;{{products.p_sold}}
+                            <i class="fa-solid fa-circle-exclamation" style = "float:right;padding-top:5px;cursor:pointer" onClick = "window.location.href='{{url_for('sold', input_id = products.id)}}'"> 판매완료처리</i>
+                            
+                        </li>
+                        
+                </div>
+            </div>
+            <div class = "col">
+                <div>
+                    <br>
+                    <h2 style = "font-weight:bold"><label>{{products.p_info}}</label></h2>
+                    <h1 style = "color:#DC143C">\ {{products.p_price}}</h1><br>
+                    <hr style = "background:black">
+                    <p>
+                    <i class="fa-solid fa-calendar-days">  {{products.p_time}}</i>
+                    </p><br>
+                    <p>
+                        <i class="fa-solid fa-hashtag"> {{products.p_key}}</i>
+                    </p><br>
+                    
+                </div>
+                
+
+            </div>
+
+            <div style = "display:flex; justify-content:center; align-items:center;margin-top:20px">
+                <input type = "button" style ="margin:5px;border:0;outline:0" class = "btn btn-secondary" value = "목록" onClick = "location.href='/'">
+                <input type = "button" style ="margin:5px;background-color:orange;border:0;outline:0" class = "btn btn-secondary" value = "수정" onClick = "window.location.href='{{url_for('modify', input_id = products.id)}}'">
+                <input type = "button" style ="margin:5px;background-color:#FF6347;border:0;outline:0" class = "btn btn-secondary" value = "삭제" onClick = "window.location.href='{{url_for('delete', input_id = products.id)}}'">
+                
+            </div>
+
+        </div>
+    </body>
+</html>
